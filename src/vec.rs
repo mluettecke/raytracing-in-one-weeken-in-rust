@@ -7,6 +7,8 @@ pub struct Vec3 {
     e: [f64; 3],
 }
 
+pub type Color = Vec3;
+
 impl Vec3 {
     pub fn new(e0: f64, e1: f64, e2: f64) -> Vec3 {
         Vec3 { e: [e0, e1, e2] }
@@ -30,6 +32,15 @@ impl Vec3 {
 
     pub fn length(&self) -> f64 {
         self.length_squared().sqrt()
+    }
+
+    pub fn write_color(&self) -> String {
+        format!(
+            "{} {} {}",
+            (255.999 * self[0]) as u64,
+            (255.999 * self[1]) as u64,
+            (255.999 * self[2]) as u64
+        )
     }
 }
 
