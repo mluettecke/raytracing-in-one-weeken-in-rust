@@ -1,5 +1,4 @@
-mod vec;
-use vec::{Point, Vec};
+use crate::vec::{Point, Vec3};
 
 pub struct Ray {
     orig: Point,
@@ -7,7 +6,7 @@ pub struct Ray {
 }
 
 impl Ray {
-    pub fn new(orig: Point, dir: Vec3) {
+    pub fn new(orig: Point, dir: Vec3) -> Ray {
         Ray {
             orig: orig,
             dir: dir,
@@ -22,7 +21,7 @@ impl Ray {
         self.dir
     }
 
-    pub fn at(&self, t: f64) {
+    pub fn at(&self, t: f64) -> Point {
         self.orig + t * self.dir
     }
 }
