@@ -1,3 +1,5 @@
+mod vec;
+
 use std::io::{stderr, Write};
 
 fn main() {
@@ -21,5 +23,6 @@ fn main() {
             println!("{} {} {}", ir, ig, ib)
         }
     }
+
     eprintln!("\nDone.")
 }
