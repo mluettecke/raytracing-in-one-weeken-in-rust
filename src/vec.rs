@@ -1,6 +1,6 @@
 use std::{
     fmt::Display,
-    ops::{Add, AddAssign, DivAssign, Index, IndexMut, Neg, Sub, SubAssign},
+    ops::{Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
 pub struct Vec3 {
@@ -57,7 +57,7 @@ impl Neg for Vec3 {
 }
 
 impl Index<usize> for Vec3 {
-    fn index(&self, index: usize) -> &Self::Output {
+    fn index(&self, index: usize) -> &f64 {
         &self.e[index]
     }
 
@@ -65,18 +65,18 @@ impl Index<usize> for Vec3 {
 }
 
 impl IndexMut<usize> for Vec3 {
-    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+    fn index_mut(&mut self, index: usize) -> &mut f64 {
         &mut self.e[index]
     }
 }
 
 impl Add for Vec3 {
-    fn add(self, rhs: Self) -> Self::Output {
+    fn add(self, rhs: Self) -> Vec3 {
         Self {
             e: [
-                self.e[0] - rhs.e[0],
-                self.e[1] - rhs.e[1],
-                self.e[2] - rhs.e[2],
+                self.e[0] + rhs.e[0],
+                self.e[1] + rhs.e[1],
+                self.e[2] + rhs.e[2],
             ],
         }
     }
@@ -97,7 +97,7 @@ impl AddAssign for Vec3 {
 }
 
 impl Sub for Vec3 {
-    fn sub(self, rhs: Self) -> Self::Output {
+    fn sub(self, rhs: Self) -> Vec3 {
         Self {
             e: [
                 self.e[0] - rhs.e[0],
@@ -122,14 +122,58 @@ impl SubAssign for Vec3 {
     }
 }
 
-impl DivAssign for Vec3 {
-    fn div_assign(&mut self, rhs: Self) {
-        *self = Self {
-            e: [
-                self.e[0] / rhs.e[0],
-                self.e[1] / rhs.e[1],
-                self.e[2] / rhs.e[2],
-            ],
+impl Div<f64> for Vec3 {
+    type Output = Vec3;
+
+    fn div(self, t: f64) -> Vec3 {
+        Vec3 {
+            e: [self[0] / t, self[1] / t, self[2] / t],
         }
     }
+}
+
+impl DivAssign<f64> for Vec3 {
+    fn div_assign(&mut self, rhs: f64) {
+        *self = Self {
+            e: [self.e[0] / rhs, self.e[1] / rhs, self.e[2] / rhs],
+        }
+    }
+}
+
+impl Mul<f64> for Vec3 {
+    type Output = Vec3;
+
+    fn mul(self, rhs: f64) -> Vec3 {
+        Vec3 {
+            e: [self[0] * rhs, self[1] * rhs, self[2] * rhs],
+        }
+    }
+}
+
+impl MulAssign<f64> for Vec3 {
+    fn mul_assign(&mut self, rhs: f64) -> () {
+        *self = Vec3 {
+            e: [self[0] * rhs, self[1] * rhs, self[2] * rhs],
+        };
+    }
+}
+
+pub fn dot(u: &Vec3, v: &Vec3) -> f64 {
+    u.e[0] * v.e[0] + u.e[1] * v.e[1] + u.e[2] * v.e[2]
+}
+
+pub fn cross(u: &Vec3, v: &Vec3) -> Vec3 {
+    Vec3::new(
+        u.e[1] * v.e[2] - u.e[2] * v.e[1],
+        u.e[2] * v.e[0] - u.e[0] * v.e[2],
+        u.e[0] * v.e[1] - u.e[1] * v.e[0],
+    )
+}
+
+pub fn unit_vector(u: &Vec3, v: &Vec3) -> Vec3 {
+    Vec3::new(
+        u.e[1] * v.e[2] - u.e[2] * v.e[1],
+        u.e[2] * v.e[0] - u.e[0] * v.e[2],
+        u.e[0] * v.e[1] - u.e[1] * v.e[0],
+    )
 }
