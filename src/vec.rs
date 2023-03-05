@@ -3,6 +3,7 @@ use std::{
     ops::{Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
+#[derive(Clone, Copy)]
 pub struct Vec3 {
     e: [f64; 3],
 }
