@@ -5,6 +5,7 @@ use crate::ray::Ray;
 use crate::vec::unit_vector;
 use crate::vec::{Color, Point, Vec3};
 use std::io::{stderr, Write};
+use std::time::Instant;
 
 fn ray_color(r: Ray) -> Vec3 {
     let unit_direction: Vec3 = unit_vector(r.direction());
@@ -28,7 +29,7 @@ fn main() {
     let vertical = Vec3::new(0.0, VIEWPORT_HEIGHT, 0.0);
     let lower_left_corner =
         origin - horizontal / 2.0 - vertical / 2.0 - Vec3::new(0.0, 0.0, FOCAL_LENGTH);
-
+    let start = Instant::now();
     println!("P3\n{} {}\n255\n", IMAGE_WIDTH, IMAGE_HEIGHT);
 
     for j in (0..IMAGE_HEIGHT).rev() {
@@ -42,10 +43,9 @@ fn main() {
                 lower_left_corner + u * horizontal + v * vertical - origin,
             );
             let pixel_color = ray_color(r);
-
             println!("{}", pixel_color.write_color());
         }
     }
-
-    eprintln!("\nDone.")
+    let duration = start.elapsed();
+    eprintln!("\nDone in {:?}", duration)
 }
