@@ -36,12 +36,13 @@ impl Vec3 {
         self.length_squared().sqrt()
     }
 
-    pub fn write_color(&self) -> String {
+    pub fn write_color(&self, samples_per_pixel: f64) -> String {
+        let scale = 1.0 / samples_per_pixel;
         format!(
             "{} {} {}",
-            (255.999 * self[0]) as u64,
-            (255.999 * self[1]) as u64,
-            (255.999 * self[2]) as u64
+            (256.0 * (self[0] * scale).clamp(0.0, 0.999)) as u64,
+            (256.0 * (self[1] * scale).clamp(0.0, 0.999)) as u64,
+            (256.0 * (self[2] * scale).clamp(0.0, 0.999)) as u64
         )
     }
 }
