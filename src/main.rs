@@ -23,7 +23,7 @@ fn ray_color(r: &Ray, world: &HittableList, depth: u64) -> Color {
         return Color::new(0.0, 0.0, 0.0);
     }
     if let Some(rec) = world.hit(r, 0.001, f64::INFINITY) {
-        let target = rec.p + rec.normal + Vec3::random_unit_vector();
+        let target = rec.p + Vec3::random_in_hemisphere(rec.normal);
         return 0.5 * ray_color(&Ray::new(rec.p, target - rec.p), world, depth - 1);
     }
     let unit_direction: Vec3 = unit_vector(r.direction());
