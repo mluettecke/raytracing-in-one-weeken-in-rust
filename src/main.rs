@@ -52,7 +52,7 @@ fn main() {
     let mut s = String::new();
     write!(s, "P3\n{} {}\n255\n", IMAGE_WIDTH, IMAGE_HEIGHT).unwrap();
     for j in (0..IMAGE_HEIGHT).rev() {
-        eprint!("\rScanlines remaining: {}", j);
+        eprint!("\rScanlines remaining: {:03}", j);
         stderr().flush().unwrap();
         for i in 0..IMAGE_WIDTH {
             let mut pixel_color = Color::new(0.0, 0.0, 0.0);
