@@ -8,12 +8,42 @@ This is mostly a learning experience for me since I am a rust beginner. The code
 
 ### Chapter 2.2
 
-![](./images/chapter-02-2.ppm)
+![](./images/chapter-02-2.png)
 
 ### Chapter 4.2
 
-![](./images/chapter-04-2.ppm)
+![](./images/chapter-04-2.png)
 
-### Chapter 5-2
+### Chapter 5.2
 
-![](./images/chapter-05-2.ppm)
+![](./images/chapter-05-2.png)
+
+### Chapter 6.1
+
+![](./images/chapter-06-1.png)
+
+### Chapter 7.2
+
+|                 Before                 |                 After                 |
+| :------------------------------------: | :-----------------------------------: |
+| ![](./images/chapter-07-02-before.png) | ![](./images/chapter-07-02-after.png) |
+
+**After:**
+
+![](./images/chapter-07-02-after.png)
+
+### Chapter 8.2
+
+![](./images/chapter-08-2.png)
+
+### Chapter 8.3
+
+![](./images/chapter-08-3.png)
+
+### Chapter 8.5
+
+![](./images/chapter-08-5.png)
+
+### Chapter 8.6
+
+![](./images/chapter-08-6.png)
