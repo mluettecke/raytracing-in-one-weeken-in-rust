@@ -1,8 +1,8 @@
 # Raytracing in a weekend (in rust)
 
-An experiment to implement [Raytracing in a weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) by [Peter Shirley](https://github.com/petershirley).
+An experiment to implement [Raytracing in a weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) by [Peter Shirley](https://github.com/petershirley) in [Rust](https://www.rust-lang.org/).
 
-This is mostly a learning experience for me since I am a rust beginner. The code here could offend you.
+This is mostly a learning experience for me since I am a rust beginner.
 
 ## Produced images
 
