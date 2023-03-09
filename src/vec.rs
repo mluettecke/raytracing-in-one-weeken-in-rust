@@ -40,6 +40,10 @@ impl Vec3 {
         }
     }
 
+    pub fn random_unit_vector() -> Vec3 {
+        return unit_vector(Self::random_in_unit_sphere());
+    }
+
     pub fn x(&self) -> f64 {
         self.e[0]
     }
