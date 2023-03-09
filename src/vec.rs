@@ -3,6 +3,8 @@ use std::{
     ops::{Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
+use rand::Rng;
+
 #[derive(Clone, Copy)]
 pub struct Vec3 {
     e: [f64; 3],
@@ -14,6 +16,28 @@ pub type Point = Vec3;
 impl Vec3 {
     pub fn new(e0: f64, e1: f64, e2: f64) -> Vec3 {
         Vec3 { e: [e0, e1, e2] }
+    }
+
+    pub fn random(min: f64, max: f64) -> Vec3 {
+        let mut rng = rand::thread_rng();
+        Vec3 {
+            e: [
+                rng.gen_range(min..max),
+                rng.gen_range(min..max),
+                rng.gen_range(min..max),
+            ],
+        }
+    }
+
+    pub fn random_in_unit_sphere() -> Vec3 {
+        let mut rng = rand::thread_rng();
+        let unit = Vec3::new(1.0, 1.0, 1.0);
+        loop {
+            let p = 2.0 * (Vec3::new(rng.gen::<f64>(), rng.gen::<f64>(), rng.gen::<f64>())) - unit;
+            if p.length_squared() < 1.0 {
+                return p;
+            }
+        }
     }
 
     pub fn x(&self) -> f64 {
@@ -38,11 +62,14 @@ impl Vec3 {
 
     pub fn write_color(&self, samples_per_pixel: f64) -> String {
         let scale = 1.0 / samples_per_pixel;
+        let r = (self.x() * scale).sqrt();
+        let g = (self.y() * scale).sqrt();
+        let b = (self.z() * scale).sqrt();
         format!(
             "{} {} {}",
-            (256.0 * (self[0] * scale).clamp(0.0, 0.999)) as u64,
-            (256.0 * (self[1] * scale).clamp(0.0, 0.999)) as u64,
-            (256.0 * (self[2] * scale).clamp(0.0, 0.999)) as u64
+            (256.0 * r.clamp(0.0, 0.999)) as u64,
+            (256.0 * g.clamp(0.0, 0.999)) as u64,
+            (256.0 * b.clamp(0.0, 0.999)) as u64
         )
     }
 }
