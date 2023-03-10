@@ -46,4 +46,4 @@ This is mostly a learning experience for me since I am a rust beginner.
 
 ### Chapter 9.5
 
-![](./images/chapter-09-5.ppm)
+![](./images/chapter-09-5.png)
