@@ -28,10 +28,6 @@ This is mostly a learning experience for me since I am a rust beginner.
 | :------------------------------------: | :-----------------------------------: |
 | ![](./images/chapter-07-02-before.png) | ![](./images/chapter-07-02-after.png) |
 
-**After:**
-
-![](./images/chapter-07-02-after.png)
-
 ### Chapter 8.2
 
 ![](./images/chapter-08-2.png)
@@ -47,3 +43,7 @@ This is mostly a learning experience for me since I am a rust beginner.
 ### Chapter 8.6
 
 ![](./images/chapter-08-6.png)
+
+### Chapter 9.5
+
+![](./images/chapter-09-5.ppm)

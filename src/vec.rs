@@ -53,6 +53,15 @@ impl Vec3 {
         return unit_vector(Self::random_in_unit_sphere());
     }
 
+    pub fn near_zero(&self) -> bool {
+        const S: f64 = 1e-8;
+        self.e[0].abs() < S && self.e[1].abs() < S && self.e[2].abs() < S
+    }
+
+    pub fn reflect(v: Vec3, n: Vec3) -> Vec3 {
+        v - (2.0 * dot(v, n) * n)
+    }
+
     pub fn x(&self) -> f64 {
         self.e[0]
     }
@@ -194,6 +203,16 @@ impl DivAssign<f64> for Vec3 {
     }
 }
 
+impl Mul<Vec3> for Vec3 {
+    type Output = Vec3;
+
+    fn mul(self, other: Vec3) -> Vec3 {
+        Vec3 {
+            e: [self[0] * other[0], self[1] * other[1], self[2] * other[2]],
+        }
+    }
+}
+
 impl Mul<f64> for Vec3 {
     type Output = Vec3;
 
@@ -226,6 +245,7 @@ pub fn dot(u: Vec3, v: Vec3) -> f64 {
     u.e[0] * v.e[0] + u.e[1] * v.e[1] + u.e[2] * v.e[2]
 }
 
+#[allow(dead_code)]
 pub fn cross(u: &Vec3, v: &Vec3) -> Vec3 {
     Vec3::new(
         u.e[1] * v.e[2] - u.e[2] * v.e[1],

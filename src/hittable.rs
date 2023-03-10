@@ -1,12 +1,16 @@
+use std::rc::Rc;
+
 use crate::{
+    material::Scatter,
     ray::Ray,
     vec::{dot, Point, Vec3},
 };
 
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 pub struct HitRecord {
     pub p: Point,
     pub normal: Vec3,
+    pub mat_ptr: Rc<dyn Scatter>,
     pub t: f64,
     pub front_face: bool,
 }
