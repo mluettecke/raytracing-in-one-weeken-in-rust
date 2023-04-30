@@ -10,7 +10,7 @@ use rayon::prelude::{IntoParallelIterator, ParallelIterator};
 
 use crate::camera::Camera;
 use crate::hittable_list::HittableList;
-use crate::material::{Lambertian, Metal};
+use crate::material::{Dielectric, Lambertian, Metal};
 use crate::ray::Ray;
 use crate::sphere::Sphere;
 use crate::vec::unit_vector;
@@ -45,11 +45,12 @@ fn main() {
     const SAMPLES_PER_IMAGE: u32 = 200;
     const MAX_DEPTH: u64 = 50;
     const PIXEL_COUNT: u32 = IMAGE_WIDTH * IMAGE_HEIGHT;
+
     // World
     let mut world = HittableList::new();
     let mat_ground = Arc::new(Lambertian::new(Color::new(0.8, 0.8, 0.0)));
-    let mat_center = Arc::new(Lambertian::new(Color::new(0.7, 0.3, 0.3)));
-    let mat_left = Arc::new(Metal::new(Color::new(0.8, 0.8, 0.8), 0.3));
+    let mat_center = Arc::new(Dielectric::new(1.5));
+    let mat_left = Arc::new(Dielectric::new(1.5));
     let mat_right = Arc::new(Metal::new(Color::new(0.8, 0.6, 0.2), 1.0));
 
     let sphere_ground = Sphere::new(Point::new(0.0, -100.5, -1.0), 100.0, mat_ground);
@@ -93,7 +94,6 @@ fn main() {
     for pixel in unlocked_pixels.iter() {
         write!(s, "{}\n", pixel.write_color(SAMPLES_PER_IMAGE as f64)).unwrap()
     }
-
     println!("{}", s);
     let duration = start.elapsed();
     eprintln!("\nDone in {:?}", duration)

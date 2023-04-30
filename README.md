@@ -51,3 +51,7 @@ This is mostly a learning experience for me since I am a rust beginner.
 ### Chapter 9.6
 
 ![](./images/chapter-09-6.png)
+
+### Chapter 10.2
+
+![](./images/chapter-10-2.png)
