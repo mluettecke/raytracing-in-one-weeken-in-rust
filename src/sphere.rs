@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::hittable::{HitRecord, Hittable};
 use crate::material::Scatter;
@@ -7,11 +7,11 @@ use crate::vec::{dot, Point};
 pub struct Sphere {
     center: Point,
     radius: f64,
-    mat_ptr: Rc<dyn Scatter>,
+    mat_ptr: Arc<dyn Scatter + Send + Sync>,
 }
 
 impl Sphere {
-    pub fn new(cen: Point, r: f64, m: Rc<dyn Scatter>) -> Sphere {
+    pub fn new(cen: Point, r: f64, m: Arc<dyn Scatter + Send + Sync>) -> Sphere {
         Sphere {
             center: cen,
             radius: r,

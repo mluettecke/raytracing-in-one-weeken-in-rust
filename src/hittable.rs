@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::{
     material::Scatter,
@@ -10,7 +10,7 @@ use crate::{
 pub struct HitRecord {
     pub p: Point,
     pub normal: Vec3,
-    pub mat_ptr: Rc<dyn Scatter>,
+    pub mat_ptr: Arc<dyn Scatter>,
     pub t: f64,
     pub front_face: bool,
 }
